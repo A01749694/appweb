@@ -1,8 +1,10 @@
+import 'devextreme/dist/css/dx.light.css';
 import React, { useState } from 'react';
 import TaskListPage from './components/TaskListPage';
-import Calendar from './components/Calendar';
+import Calendario from './components/Calendario';
 import ClassList from './components/ClassList';
 import './App.css';
+
 
 function App() {
     const [currentTab, setCurrentTab] = useState('tasks');
@@ -12,7 +14,7 @@ function App() {
             case 'tasks':
                 return <TaskListPage />;
             case 'calendar':
-                return <Calendar />;
+                return <Calendario />;
             case 'classes':
                 return <ClassList />;
             default:
