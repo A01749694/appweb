@@ -3,7 +3,7 @@
 /* Estilos generales para la aplicación */
 body {
   font-family: Arial, sans-serif;
-  background-color: #f0f0f0;
+  background-color: #bd6060;
   margin: 0;
   padding: 0;
 }
@@ -15,6 +15,7 @@ body {
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
+  text-align: center;
 }
 
 h1 {
@@ -87,4 +88,26 @@ li button:hover {
 li span.completed {
   text-decoration: line-through;
   color: #888;
+}
+
+nav {
+  background-color: #282c34;
+  padding: 1rem;
+}
+
+nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+nav ul li {
+  display: inline;
+  margin: 0 1rem;
+  color: white;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+nav ul li:hover {
+  text-decoration: underline;
 }
