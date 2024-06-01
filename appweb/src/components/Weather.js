@@ -62,7 +62,7 @@ const Weather = () => {
 
     return (
         <div className="weather-widget">
-            <h1 className="app-name">Weather App</h1>
+            <h1 className="app-name">Clima</h1>
             <div className="search-bar">
                 <input
                     type="text"
