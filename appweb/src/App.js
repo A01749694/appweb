@@ -1,10 +1,9 @@
-import 'devextreme/dist/css/dx.light.css';
 import React, { useState } from 'react';
 import TaskListPage from './components/TaskListPage';
 import Calendario from './components/Calendario';
 import ClassList from './components/ClassList';
+import Weather from './components/Weather'; // Agrega esta línea
 import './App.css';
-
 
 function App() {
     const [currentTab, setCurrentTab] = useState('tasks');
@@ -24,16 +23,16 @@ function App() {
 
     return (
         <div className="App">
-            <nav>
-                <ul>
-                    <li onClick={() => setCurrentTab('tasks')}>Tareas</li>
-                    <li onClick={() => setCurrentTab('calendar')}>Calendario</li>
-                    <li onClick={() => setCurrentTab('classes')}>Clases</li>
-                </ul>
+            <Weather /> {/* Agrega el componente Weather aquí */}
+            <nav className="w3-bar w3-black">
+                <button className="w3-bar-item w3-button" onClick={() => setCurrentTab('tasks')}>Tareas</button>
+                <button className="w3-bar-item w3-button" onClick={() => setCurrentTab('calendar')}>Calendario</button>
+                <button className="w3-bar-item w3-button" onClick={() => setCurrentTab('classes')}>Clases</button>
             </nav>
             {renderTab()}
         </div>
     );
 }
+
 
 export default App;
