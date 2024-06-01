@@ -1,70 +1,62 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Oval } from 'react-loader-spinner';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFrown } from '@fortawesome/free-solid-svg-icons';
+import './Weather.css';
 
 const Weather = () => {
-    const [input, setInput] = useState('');
+    const defaultCity = 'Mexico City'; // Ciudad por defecto
+
+    const [input, setInput] = useState(defaultCity); // Ciudad por defecto
     const [weather, setWeather] = useState({
-        loading: false,
-        data: {},
+        loading: true, // Inicia con carga activada
+        data: {}, // Datos vacíos inicialmente
         error: false,
     });
 
+    useEffect(() => {
+        searchWeather(defaultCity); // Cargar datos de la ciudad por defecto al iniciar
+    }, []); // Ejecutar una vez al montar el componente
+
     const toDateFunction = () => {
         const months = [
-            'January',
-            'February',
-            'March',
-            'April',
-            'May',
-            'June',
-            'July',
-            'August',
-            'September',
-            'October',
-            'November',
-            'December',
+            'January', 'February', 'March', 'April', 'May', 'June',
+            'July', 'August', 'September', 'October', 'November', 'December'
         ];
         const WeekDays = [
-            'Sunday',
-            'Monday',
-            'Tuesday',
-            'Wednesday',
-            'Thursday',
-            'Friday',
-            'Saturday',
+            'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'
         ];
         const currentDate = new Date();
         const date = `${WeekDays[currentDate.getDay()]} ${currentDate.getDate()} ${months[currentDate.getMonth()]}`;
         return date;
     };
 
+    const searchWeather = async (city) => {
+        setWeather({ ...weather, loading: true }); // Inicia la carga
+
+        const url = 'https://api.openweathermap.org/data/2.5/weather';
+        const api_key = 'f00c38e0279b7bc85480c3fe775d518c';
+        try {
+            const res = await axios.get(url, {
+                params: {
+                    q: city,
+                    units: 'metric',
+                    appid: api_key,
+                },
+            });
+            setWeather({ data: res.data, loading: false, error: false });
+        } catch (error) {
+            setWeather({ ...weather, data: {}, error: true });
+            console.log('error', error);
+        }
+    };
+
     const search = async (event) => {
         if (event.key === 'Enter') {
             event.preventDefault();
             setInput('');
-            setWeather({ ...weather, loading: true });
-            const url = 'https://api.openweathermap.org/data/2.5/weather';
-            const api_key = 'f00c38e0279b7bc85480c3fe775d518c';
-            await axios
-                .get(url, {
-                    params: {
-                        q: input,
-                        units: 'metric',
-                        appid: api_key,
-                    },
-                })
-                .then((res) => {
-                    console.log('res', res);
-                    setWeather({ data: res.data, loading: false, error: false });
-                })
-                .catch((error) => {
-                    setWeather({ ...weather, data: {}, error: true });
-                    setInput('');
-                    console.log('error', error);
-                });
+            searchWeather(input); // Buscar la ciudad ingresada por el usuario
         }
     };
 
@@ -93,16 +85,16 @@ const Weather = () => {
                 <>
                     <br />
                     <br />
-                    <span className="error-message">
+                    <span className="error-message w3-text-red">
                         <FontAwesomeIcon icon={faFrown} />
-                        <span style={{ fontSize: '20px' }}>City not found</span>
+                        <span className="w3-large">City not found</span>
                     </span>
                 </>
             )}
             {weather && weather.data && weather.data.main && (
                 <div>
-                    <div className="city-name">
-                        <h2>
+                    <div className="city-name w3-text-center">
+                        <h2 className="w3-text-large">
                             {weather.data.name}, <span>{weather.data.sys.country}</span>
                         </h2>
                     </div>
