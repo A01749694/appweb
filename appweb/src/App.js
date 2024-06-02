@@ -5,7 +5,6 @@ import ClassList from './components/ClassList';
 import Weather from './components/Weather';
 import Notes from './components/Notes';
 import './App.css';
-import News from './components/News';
 
 function App() {
     const [currentTab, setCurrentTab] = useState('tasks');
@@ -40,9 +39,6 @@ function App() {
                 <div className="content">
                     {renderTab()}
                 </div>
-            </div>
-            <div className="sidebar-right">
-                <News /> {/* Colocar el componente News aquí dentro de la sección de la barra lateral derecha */}
             </div>
         </div>
     );

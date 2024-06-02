@@ -5,36 +5,28 @@ const News = () => {
   const [articles, setArticles] = useState([]);
 
   useEffect(() => {
-    const fetchNews = async () => {
-      try {
-        const response = await axios.get(`https://newsapi.org/v2/top-headlines`, {
-          params: {
-            country: 'mx', // Change this to your desired country code
-            apiKey: 'd6942e22d3804e2eba2963be2627bb73', // Replace with your News API key
-          },
-        });
-        setArticles(response.data.articles);
-      } catch (error) {
-        console.error('Error fetching news:', error);
-      }
+    const fetchArticles = async () => {
+      const response = await axios.get('https://newsapi.org/v2/everything?q=apple&from=2024-06-01&to=2024-06-01&sortBy=popularity&apiKey=d6942e22d3804e2eba2963be2627bb73', {
+        params: {
+          country: 'us',
+          apiKey: 'd6942e22d3804e2eba2963be2627bb73'
+        }
+      });
+
+      setArticles(response.data.articles);
     };
 
-    fetchNews();
+    fetchArticles();
   }, []);
 
   return (
     <div>
-      <h1>Top Headlines</h1>
-      <ul>
-        {articles.map((article, index) => (
-          <li key={index}>
-            <a href={article.url} target="_blank" rel="noopener noreferrer">
-              {article.title}
-            </a>
-            <p>{article.description}</p>
-          </li>
-        ))}
-      </ul>
+      {articles.map((article, index) => (
+        <div key={index}>
+          <h2>{article.title}</h2>
+          <p>{article.description}</p>
+        </div>
+      ))}
     </div>
   );
 };
