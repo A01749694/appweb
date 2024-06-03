@@ -17,7 +17,7 @@ const Calendario = () => {
     return (
         <div className="w3-container">
             <h1 className="w3-center">Calendario</h1>
-            <div className="w3-margin-bottom w3-center"> {/* Agrega la clase w3-center para centrar el calendario */}
+            <div className="w3-margin-bottom"> {/* Eliminé la clase w3-center aquí */}
                 <Calendar
                     zoomLevel={zoomLevel}
                     showTodayButton={true}

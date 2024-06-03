@@ -1,3 +1,15 @@
-.w3-center {
+/* Calendario.css */
+.w3-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.w3-margin-bottom {
+    margin-bottom: 16px;
+}
+
+.w3-margin-top {
+    margin-top: 16px;
     text-align: center;
 }
